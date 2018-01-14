@@ -39,11 +39,17 @@ my_hdr X-Message-Flag: OUTLOOK WARNING!! Use Open Source
 my_hdr Reply-By: `date --date="-3 days"`
 my_hdr X-MSMail-Priority: High
 #######################################################
+# Passwd with gpg
+#######################################################
+#set my_tmp=`gpg -o ~/.secret/.tmp -d ~/.secret/.passwd.gpg`
+#set my_pass=`awk '/Mail/ {print $2}' ~/.secret/.tmp`
+#set my_del=`rm -f ~/.secret/.tmp`
+#######################################################
 # Configuration imap
 #######################################################
 set spoolfile = "imaps://domain.ltd:993/INBOX"
 set imap_user = "user@domain.ltd"
-set imap_pass = `grep 'Mail' ~/Private/passwords | awk '{print $2}'` # à adapter +chmod 600 sur fichier
+set imap_pass = `grep 'Mail' ~/Private/passwords | awk '{print $2}'` # à adapter +chmod 600 sur fichier ou $my_pass
 set imap_passive = "no"
 set imap_check_subscribed = "yes"
 set imap_list_subscribed = "yes"
