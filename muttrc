@@ -41,15 +41,16 @@ my_hdr X-MSMail-Priority: High
 #######################################################
 # Passwd with gpg
 #######################################################
-#set my_tmp=`gpg -o ~/.secret/.tmp -d ~/.secret/.passwd.gpg`
-#set my_pass=`awk '/Mail/ {print $2}' ~/.secret/.tmp`
-#set my_del=`rm -f ~/.secret/.tmp`
+set my_tmp=`gpg --output ~/.secret/.tmp --decrypt ~/.secret/.passwd.gpg`
+set my_pass=`awk '/Mail/ {print $2}' ~/.secret/.tmp`
+set my_del=`rm -f ~/.secret/.tmp`
 #######################################################
 # Configuration imap
 #######################################################
 set spoolfile = "imaps://domain.ltd:993/INBOX"
 set imap_user = "user@domain.ltd"
-set imap_pass = `grep 'Mail' ~/Private/passwords | awk '{print $2}'` # à adapter +chmod 600 sur fichier ou $my_pass
+#set imap_pass = `grep 'Mail' ~/Private/passwords | awk '{print $2}'` # à adapter +chmod 600 sur fichier
+set imap_pass = $my_pass
 set imap_passive = "no"
 set imap_check_subscribed = "yes"
 set imap_list_subscribed = "yes"
@@ -65,7 +66,8 @@ set mail_check = 60
 set ssl_force_tls = yes
 # configuration SMTP 465
 set smtp_authenticators = "gssapi:cram-md5:login"
-set smtp_pass = `grep 'Mail' ~/Private/passwordst | awk '{print $2}'`
+#set smtp_pass = `grep 'Mail' ~/Private/passwords | awk '{print $2}'`
+set smtp_pass = $my_pass
 set hostname = "domain.ltd"
 set realname = "Matthieu Fontana"
 set smtp_url = "smtps://user@domain.ltd@domain.ltd:465/"
