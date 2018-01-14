@@ -43,7 +43,7 @@ my_hdr X-MSMail-Priority: High
 #######################################################
 set spoolfile = "imaps://domain.ltd:993/INBOX"
 set imap_user = "user@domain.ltd"
-set imap_pass = "p4ssw0rd"
+set imap_pass = `grep 'Mail' ~/Private/passwords | awk '{print $2}'` # à adapter +chmod 600 sur fichier
 set imap_passive = "no"
 set imap_check_subscribed = "yes"
 set imap_list_subscribed = "yes"
@@ -61,7 +61,7 @@ set ssl_force_tls = yes
 
 # configuration SMTP 465
 set smtp_authenticators = "gssapi:cram-md5:login"
-set smtp_pass = "p4ssw0rd"
+set smtp_pass = `grep 'Mail' ~/Private/passwordst | awk '{print $2}'`
 set hostname = "domain.ltd"
 set realname = "Matthieu Fontana"
 set smtp_url = "smtps://user@domain.ltd@domain.ltd:465/"
