@@ -59,12 +59,10 @@ set record = "~/.mutt/cache/bodies/imaps:user@domain.ltd@si.noho.st:993/Sent"
 set postponed = "~/.mutt/cache/bodies/imaps:user@domain.ltd@domain.ltd:993/Drafts"
 set trash = "~/.mutt/cache/bodies/imaps:user@domain.ltd@domain.ltd:993/Trash"
 set mail_check = 60
-
 # activate TLS if available on the server
 #set ssl_starttls=yes
 # always use SSL when connecting to a server
 set ssl_force_tls = yes
-
 # configuration SMTP 465
 set smtp_authenticators = "gssapi:cram-md5:login"
 set smtp_pass = `grep 'Mail' ~/Private/passwordst | awk '{print $2}'`
@@ -73,7 +71,6 @@ set realname = "Matthieu Fontana"
 set smtp_url = "smtps://user@domain.ltd@domain.ltd:465/"
 set from = "user@domain.ltd"
 set use_envelope_from = yes # Pour que postfix ou sendmail ne change pas votre from
-
 # pour les google addicts
 #set trash = "imaps://imap.gmail.com/[Gmail]/Trash"
 #set postponed="+[Gmail]/Draft"
@@ -84,7 +81,6 @@ set mail_check = 120
 set timeout = 300
 set imap_keepalive = 300
 set signature = "~/.mutt/signature"
-
 # locales FR pour les nom des jours et mois
 set allow_8bit = yes
 set locale = "fr_FR.utf8"
@@ -102,25 +98,20 @@ charset-hook windows-1255 CP1255
 charset-hook windows-1256 CP1256
 charset-hook windows-1257 CP1257
 charset-hook windows-1258 CP1258
-
 # Format de date
 set date_format = "%A %d %b %Y à %H:%M:%S (%Z)"
-
 # phrase d'intro pour réponse quotée
 set attribution = "Le %d, %n a écrit :"
 set forward_format = "[Fwd: %s]"
 set forward_quote
-
 #
 mailboxes !
-
 #Editeur
 set edit_hdrs
 auto_view text/html
 set editor = "vim -c 'set tw=72' -c 'set wrap'" # indiquer ici votre éditeur de texte préféré.
 # simplifie la procédure d'édition
 set fast_reply = yes
-
 #######################################################
 # Colors
 #######################################################
@@ -129,7 +120,6 @@ color quoted1   cyan       default
 color quoted2   magenta    default
 color quoted3   green      default
 color quoted4   red        default
-
 color signature blue default
 color normal    white black
 color status    brightgreen blue
@@ -141,7 +131,6 @@ color index     cyan black  (calomel.org) # thx Calomel :)
 color header    green black .*
 color header    brightred  black (^From\:|^Reply-To\:)
 color header    brightyellow black (^To\:|^cc\:|^Cc\:)
-
 color body      magenta      default "(ftp|http|https)://[^ ]+"
 color body      magenta      default "[-a-z_0-9.]+@[-a-z_0-9.]+"
 color body      brightgreen  default "^(gpg: )?Good signature"
@@ -149,7 +138,6 @@ color body      brightgreen  default "^(gpg: )?encrypted"
 color body      brightred    default "^(gpg: )?Bad signature"
 color body      red          default "^(gpg: )?warning:"
 color body      red          default "^(gpg: ).*failed:"
-
 color message    magenta        default # info messages
 color search     brightyellow   red     # search matches
 color tilde      brightmagenta  default # ~ at bottom of msg
@@ -157,10 +145,8 @@ color markers    red            default # + at beginning of wrapped lines
 color hdrdefault cyan           default # default header lines
 color bold       cyan           default # hiliting bold patterns in body
 color underline  cyan           default # hiliting underlined patterns in body
-
 color index     green          default  ~T      # Tagged
 color index     red            default  ~D      # Deleted
-
 #######################################################
 # Pour la gestion des accents
 #######################################################
@@ -169,16 +155,13 @@ set locale="iso-8859-15"
 set ispell="aspell -e -c"
 set pager_index_lines=7
 set pager_stop
-
 #######################################################
 # GPG
 #######################################################
 my_hdr X-PGP-B1CD2A27: http://pgp.mit.edu/pks/lookup?op=vindex&search=0x86D79C86B1CD2A27
 my_hdr X-PGP-B1CD2A27-FP: 0CDA 235C D4CA 5314 0EFA B711 86D7 9C86 B1CD 2A27
-
 send-hook matt@it.noho.st 'set pgp_autosign; set pgp_autoencrypt'
 pgp-hook matt@it.noho.st 0x86D79C86B1CD2A27
-
 set pgp_decode_command="gpg %?p?--passphrase-fd 0? --no-verbose --batch --output - %f"
 set pgp_verify_command="gpg --no-verbose --batch --output - --verify %s %f"
 set pgp_decrypt_command="gpg --passphrase-fd 0 --no-verbose --batch --output - %f"
