@@ -45,6 +45,12 @@ set my_tmp=`gpg --output ~/.secret/.tmp --decrypt ~/.secret/.passwd.gpg`
 set my_pass=`awk '/Mail/ {print $2}' ~/.secret/.tmp`
 set my_del=`rm -f ~/.secret/.tmp`
 #######################################################
+# alternate crypto method with "pass" (more info : `man pass`) 
+#######################################################
+#set my_tmp = `pass your_domain_pass_folder/your_user > ~/.secret/.tmp`
+#set my_pass = `awk '{print $0}' ~/.secret/.tmp`
+#set my_del = `rm -f ~/.secret/.tmp`
+#######################################################
 # Configuration imap
 #######################################################
 set spoolfile = "imaps://domain.ltd:993/INBOX"
@@ -160,7 +166,7 @@ set pager_stop
 #######################################################
 # GPG
 #######################################################
-my_hdr X-PGP-B1CD2A27: http://pgp.mit.edu/pks/lookup?op=vindex&search=0x86D79C86B1CD2A27
+my_hdr X-PGP-B1CD2A27: http://pgp.mit.edu/pks/lookup?op=vindex&search=0x86D79C86B1CD2A27 # replace with your own public key
 my_hdr X-PGP-B1CD2A27-FP: 0CDA 235C D4CA 5314 0EFA B711 86D7 9C86 B1CD 2A27
 send-hook matt@it.noho.st 'set pgp_autosign; set pgp_autoencrypt'
 pgp-hook matt@it.noho.st 0x86D79C86B1CD2A27
@@ -196,7 +202,7 @@ set beep_new=yes
 # sinon, silence
 set beep=no
 #######################################################
-# Carnet d'adresses
+# Carnet d'adresses abook (apt install abook)
 #######################################################
 macro index,pager  a "<pipe-message>abook --add-email-quiet<return>" "Ajouter cet expéditeur dans Abook"
 set query_command= "abook --mutt-query '%s'"
