@@ -1,2 +1,2 @@
-# mutt-config
+# muttrc
 Mutt configuration file
