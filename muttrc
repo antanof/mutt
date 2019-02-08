@@ -3,7 +3,7 @@
 #######################################################
 # System configuration file for Mutt ( .muttrc )
 # Créé le: 02/01/2011
-# Dernière modification le: 14/01/2018
+# Dernière modification le: 08/02/2019
 # Many thanks to Sven Guckes, Calomel, Luc hermitte and the OpenSource Community
 #######################################################
 # Pager
@@ -14,19 +14,19 @@ hdr_order X-Bogosity From: Reply-To: To: Cc: Date: Subject:
 #######################################################
 # Configuration de base
 #######################################################
-set realname = "Matthieu Fontana"
+set realname = ""
 set header_cache = ~/.mutt/cache/headers
 set certificate_file = ~/.mutt/certificates
 set message_cachedir = ~/.mutt/cache/bodies
-my_hdr From: user@domain.ltd (Matthieu Fontana)
-my_hdr Reply-To: user@domain.ltd (Matthieu Fontana)
+my_hdr From: user@domain.ltd (Mxx Mxx)
+my_hdr Reply-To: user@domain.ltd (Mxx Mxx)
 my_hdr Errors-To: user2@domain.ltd
 my_hdr X-Mailer: Mutt http://www.mutt.org/
-my_hdr X-Editor: Vim 7.4.1689 [2018-01-14] http://www.vim.org/
+my_hdr X-Editor: Vim 8.0.1453 [2018-08-20] http://www.vim.org/
 my_hdr X-Uptime: `uptime -p`
-my_hdr X-Disclaimer: Please visit my website  # Ceci est un commentaire
-my_hdr X-Operating-System: `uname`
-my_hdr Organization: COMCA
+my_hdr X-Disclaimer: Please visit my website
+my_hdr X-Operating-System: `uname -o`
+my_hdr Organization: ITcloud
 my_hdr X-URL: https://domain.ltd/
 my_hdr X-Location: Europe, France, Paris
 #######################################################
@@ -41,21 +41,12 @@ my_hdr X-MSMail-Priority: High
 #######################################################
 # Passwd with gpg
 #######################################################
-set my_tmp=`gpg --output ~/.secret/.tmp --decrypt ~/.secret/.passwd.gpg`
-set my_pass=`awk '/Mail/ {print $2}' ~/.secret/.tmp`
-set my_del=`rm -f ~/.secret/.tmp`
-#######################################################
-# alternate crypto method with "pass" (more info : `man pass`) 
-#######################################################
-#set my_tmp = `pass your_domain_pass_folder/your_user > ~/.secret/.tmp`
-#set my_pass = `awk '{print $0}' ~/.secret/.tmp`
-#set my_del = `rm -f ~/.secret/.tmp`
+source "gpg -dq $HOME/.my-pwds.gpg |" # you should create this encrypt file with 'set my_pass = your_password'
 #######################################################
 # Configuration imap
 #######################################################
 set spoolfile = "imaps://domain.ltd:993/INBOX"
 set imap_user = "user@domain.ltd"
-#set imap_pass = `grep 'Mail' ~/Private/passwords | awk '{print $2}'` # à adapter +chmod 600 sur fichier
 set imap_pass = $my_pass
 set imap_passive = "no"
 set imap_check_subscribed = "yes"
@@ -72,10 +63,8 @@ set mail_check = 60
 set ssl_force_tls = yes
 # configuration SMTP 465
 set smtp_authenticators = "gssapi:cram-md5:login"
-#set smtp_pass = `grep 'Mail' ~/Private/passwords | awk '{print $2}'`
 set smtp_pass = $my_pass
 set hostname = "domain.ltd"
-set realname = "Matthieu Fontana"
 set smtp_url = "smtps://user@domain.ltd@domain.ltd:465/"
 set from = "user@domain.ltd"
 set use_envelope_from = yes # Pour que postfix ou sendmail ne change pas votre from
@@ -117,7 +106,7 @@ mailboxes !
 #Editeur
 set edit_hdrs
 auto_view text/html
-set editor = "vim -c 'set tw=72' -c 'set wrap'" # indiquer ici votre éditeur de texte préféré.
+set editor = "vim -c 'set textwidth=77'" # indiquer ici votre éditeur de texte préféré.
 # simplifie la procédure d'édition
 set fast_reply = yes
 #######################################################
@@ -168,8 +157,8 @@ set pager_stop
 #######################################################
 my_hdr X-PGP-B1CD2A27: http://pgp.mit.edu/pks/lookup?op=vindex&search=0x86D79C86B1CD2A27 # replace with your own public key
 my_hdr X-PGP-B1CD2A27-FP: 0CDA 235C D4CA 5314 0EFA B711 86D7 9C86 B1CD 2A27
-send-hook matt@it.noho.st 'set pgp_autosign; set pgp_autoencrypt'
-pgp-hook matt@it.noho.st 0x86D79C86B1CD2A27
+send-hook Mxx@domain.tld 'set pgp_autosign; set pgp_autoencrypt'
+pgp-hook Mxx@domain.tld 0x86D79C86B1CD2A27
 set pgp_decode_command="gpg %?p?--passphrase-fd 0? --no-verbose --batch --output - %f"
 set pgp_verify_command="gpg --no-verbose --batch --output - --verify %s %f"
 set pgp_decrypt_command="gpg --passphrase-fd 0 --no-verbose --batch --output - %f"
